@@ -1,0 +1,78 @@
+﻿@using BiddingProject2.Models
+@model List<Account>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    decimal s = @ViewBag.TotalPage;
+    int totalPage = int.Parse(s.ToString());
+}
+
+<h1>Customers</h1>
+
+@using (Html.BeginForm("Customers", "Admin", FormMethod.Get))
+{
+    <div class="searchSection float-right">
+        <input type="text" name="searchString" placeholder="Input something" value="@ViewBag.Search" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+}
+
+<p class="hidden" id="myMessage">@ViewBag.Msg</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Username</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Email Address</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int count = 1; }
+        @foreach (var item in Model)
+        {
+            string defaultPath = "~/Images/unnamed.png";
+            if (!String.IsNullOrEmpty(item.Profile.Image))
+            {
+                defaultPath = item.Profile.Image;
+            }
+            <tr>
+                <td>@count</td>
+                <td>@item.Username</td>
+                <td>
+                    <img src=@Url.Content(defaultPath) style="width: 100px; height: 100px;" />
+                </td>
+                <td>@item.Profile.Name</td>
+                <td>@item.Profile.Email</td>
+                <td class="common-action">
+                    <a href="#" onclick="return resetPassword(@item.AccountId)">Reset password</a> | <a href="#" onclick="customConfirm.show('Do you want to delete this customer?', deleteCustomer, @item.AccountId)">Delete</a>
+                </td>
+            </tr>
+            count += 1;
+        }
+    </tbody>
+</table>
+
+@if (ViewBag.TotalPage != 0)
+{
+    <div class="pageNumber">
+        <p>Page:&nbsp;<span id="currentPage">@ViewBag.PageNumber</span>&nbsp;of @ViewBag.TotalPage</p>
+        <ul>
+            @for (int i = 1; i <= totalPage; i++)
+            {
+                <li onclick="location.href='@Url.Action("Customers", new { page = i, searchString = @ViewBag.Search})'">
+                    <a href="@Url.Action("Customers", new { page = i, searchString = @ViewBag.Search })">@i</a>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <div class="displayNotify">
+        <h2>There are nothing on this list</h2>
+    </div>
+}

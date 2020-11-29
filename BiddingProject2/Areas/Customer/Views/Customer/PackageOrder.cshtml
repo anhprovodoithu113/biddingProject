@@ -1,0 +1,40 @@
+﻿@model string[]
+
+@{
+    ViewBag.Title = "PackageOrder";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<style>
+    .footer{
+        margin-top: 70vh;
+    }
+
+    .package-order{
+        width: 600px;
+        height: 600px;
+        margin: 0 auto;
+    }
+
+        .package-order img {
+            width: 600px;
+            height: 600px;
+        }
+
+    .order-notify{
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .order-notify span{
+        font-size: 1.8rem;
+    }
+</style>
+
+<div class="package-order">
+    <img src="~/Images/package.png" />
+</div>
+
+<p class="order-notify">
+    Thanks you for your purchase. Your order @foreach (var item in Model) { <span>@item </span>} will be processed and transfered for your address soon.
+</p>

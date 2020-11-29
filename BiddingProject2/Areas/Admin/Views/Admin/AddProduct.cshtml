@@ -1,0 +1,129 @@
+﻿@using BiddingProject2.Models
+@model Product
+
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<Category> lstCategory = ViewBag.ListCategory;
+}
+
+<style>
+    .btn-primary {
+        background-color: #7BA69F !important;
+        border: none !important;
+        margin-bottom: .5rem;
+    }
+
+    .col-lg-4 div.form-image {
+        width: 100%;
+        height: 40vh;
+        margin-left: 2rem;
+        border: 6px solid white;
+        display: block;
+    }
+
+        .col-lg-4 div.form-image input[type="file"] {
+            width: 80%;
+        }
+</style>
+
+<h1>Add Product</h1>
+<p class="hidden" id="myMessage">@ViewBag.Msg</p>
+@using (Html.BeginForm("AddProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="col-lg-4 col-md-4 float-right">
+            <div class="form-image">
+                <img src="~/Images/unnamed.png" alt="noImage" class="img-responsive"
+                     id="privateImage">
+                <input type="file" name="ProductImageFile" id="inputImage" />
+            </div>
+        </div>
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="col-lg-8 col-md-8">
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-4 col-lg-4" })
+                    <div class="col-md-8 col-lg-8">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.BeginPrice, "Begin Price (USD)", htmlAttributes: new { @class = "control-label col-md-4 col-lg-4" })
+                    <div class="col-md-8 col-lg-8">
+                        <input type="number" class="form-control" name="BeginPrice" value="1" />
+                        @Html.ValidationMessageFor(model => model.BeginPrice, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.StartDate, "Start Date", htmlAttributes: new { @class = "control-label col-md-4 col-lg-4" })
+                    <div class="col-md-8 col-lg-8">
+                        <input type="datetime-local" name="StartDate" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <div class="form-group row">
+                    <label class="control-label col-md-4 col-lg-4">Categories</label>
+                    <div class="col-md-8 col-lg-8">
+                        @if (lstCategory != null)
+                        {
+                            int count = 0;
+                            foreach (var item in lstCategory)
+                            {
+                                if (count == 3)
+                                {
+                                    count = 0;
+                                }
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="idCategories" value="@item.CategoryId">
+                                    <label class="form-check-label">@item.Name</label>
+                                </div>
+                                count++;
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8">
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4 col-lg-4" })
+                <div class="col-md-8 col-lg-8">
+                    <textarea name="Description" rows="5" cols="30" class="form-control" placeholder="Input something"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-offset-2 col-md-10 ml-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+}
+<div class="ml-4">
+    @Html.ActionLink("Back to List", "Products")
+</div>
+
+@*@section scripts{
+    <script>
+        $('#inputImage').change(function () {
+            if (this.files && this.files[0]) {
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(this.files[0]);
+                fileReader.onload = function (e) {
+                    var myImage = $('img[alt="noImage"]');
+                    myImage.attr('src', e.target.result);
+                }
+            }
+        });
+    </script>
+}*@

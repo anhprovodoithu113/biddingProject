@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h1>Dashboard</h1>
+
+<div class="dashboard-container">
+    <div class="grid-row">
+        <div class="dashboard-left-side flex-column">
+            <div class="current-users">
+                <div class="detail-current-users">
+                    <h3>New customers</h3>
+                    <p id="data-customer"></p>
+                </div>
+                <div class="status-symbol" id="difference-customer">+20%</div>
+            </div>
+
+            <div class="storage-products">
+                <div class="detail-storage-products">
+                    <h3>The products on storage</h3>
+                    <p id="data-storage"></p>
+                </div>
+                <div class="status-symbol" id="difference-storage">-14%</div>
+            </div>
+
+            <div class="sold-products">
+                <div class="detail-sold-products">
+                    <h3>Sold products</h3>
+                    <p id="data-sold"></p>
+                </div>
+                <div class="status-symbol" id="difference-sold">+7%</div>
+            </div>
+        </div>
+        <div class="dashboard-right-side">
+            <canvas id="myDashboard"></canvas>
+            <div class="float-right detail-link">
+                <a href="#">View detail</a>
+            </div>
+        </div>
+    </div>
+</div>

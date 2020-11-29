@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "AboutUs";
+    bool check = ViewBag.IsLoggin;
+    if (check)
+    {
+        Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_MainLayout.cshtml";
+    }
+}
+
+<h2 class="title-header">AboutUs</h2>
+<div class="aboutUs-content">
+    <div>
+        <h3>A bidding session has the total time is 10 minutes</h3>
+        <p>Each auction session when opened has a total time of 10 minutes for the bidders to take turns making the highest bid. They will not be able to offer any price after the above time. Over the time of the auction, the item will belong to the person who made the final bid.</p>
+    </div>
+
+    <div>
+        <h3>Transportaion fee</h3>
+        <p>All items added to the shopping cart have the delivery cost is $5. The user can have as many products in it as possible, but the fee will never change.</p>
+    </div>
+
+    <div>
+        <h3>The maximum time limit for items in the shopping cart is 2 days</h3>
+        <p>Although the shipping cost is unchanged if the total number of items in the shopping cart increases, the items will disappear if the customer does not process payment for those items within 2 days.</p>
+    </div>
+
+    <div>
+        <h3>Payment method</h3>
+        <p>Currently, this auction system has the only payment method is Paypal. The auctioneer wants to pay for the product to have a Paypal account and enough balance to pay the cost.</p>
+    </div>
+</div>

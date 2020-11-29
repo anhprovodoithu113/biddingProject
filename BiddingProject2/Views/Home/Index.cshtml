@@ -1,0 +1,96 @@
+﻿@using BiddingProject2.Models
+@using BiddingProject2.Models.ViewModel
+@model List< ProductModel>
+
+@{
+    bool check = ViewBag.IsLoggin;
+    if (check)
+    {
+        Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_MainLayout.cshtml";
+    }
+
+    List<Category> lstCategory = ViewBag.ListCategory;
+}
+
+
+<section class="img-section">
+    <div class="img-container">
+        <img src="~/Content/home/images/1.png" alt="hand-1">
+        <img src="~/Content/home/images/2.png" alt="hand-2">
+        <img src="~/Content/home/images/3.png" alt="hand-3">
+        <img src="~/Content/home/images/2.png" alt="hand-4">
+        <img src="~/Content/home/images/4.png" alt="hand-5">
+    </div>
+    <div class="slogan-text">
+        <h2>Make the imposible possible</h2>
+    </div>
+</section>
+
+<section class="latest-products">
+    <div class="section-title">
+        <h3>Latest update products</h3>
+        <div>
+            <p class="hidden myMsg">@ViewBag.DisplaySelect</p>
+            <label>Category</label>
+            <select id="category" class="form-control" onchange="changeDropdown()">
+                <option value="0">All</option>
+                @foreach (var item in lstCategory)
+                {
+                    <option value="@item.CategoryId">@item.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="list-products flex-column">
+        @{int count = 0; }
+        <div class="flex-row">
+            @foreach (var item in Model)
+            {
+                @Html.HiddenFor(m => item.ProductId, new { @class = "prodId"})
+                count++;
+
+                if (count == 5)
+                {
+                    count = 1;
+                @:</div><div class="flex-row">
+                }
+                <p class="hidden myTime">@item.StartDate</p>
+                <div class="product-card">
+                    <div class="background-card @String.Format($"card_{item.ProductId}")">
+                        <div class="notifycation">
+                            <p>This product will be started on</p>
+                            <p class="specificProduct" id="@String.Format($"product_{item.ProductId}")"></p>
+                        </div>
+                    </div>
+                    <div class="frontground-card">
+                        <div class="header-card">
+                            <h4>@item.ProductName</h4>
+                        </div>
+                        <div class="body-card">
+                            @{
+                                string path = "~/Content/home/images/product-img.jpg";
+                                if (item.Image != null)
+                                {
+                                    path = item.Image;
+                                }
+                            }
+                            <img src=@Url.Content(path) alt="noImage">
+                            <div class="product-price">
+                                <p id="price">@item.Price</p>
+                                <p id="unit">USD</p>
+                            </div>
+                            <div class="description-card">
+                                @item.Description
+                            </div>
+                            <button class="btn bidding-btn" onclick="location.href='@Url.Action("ProductDetail", "Home", new { @idProduct = item.ProductId })'">Bidding</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

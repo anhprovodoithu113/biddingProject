@@ -1,0 +1,22 @@
+﻿
+@{
+    bool check = ViewBag.IsLoggin;
+    if (check)
+    {
+        Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_MainLayout.cshtml";
+    }
+}
+
+<h2 class="title-header">Contact</h2>
+<div class="content-detail">
+    <p>If there are any error when you using this site. Please contact us through list address below:</p>
+    <ul>
+        <li><i class="fa fa-facebook-square"></i>&nbsp; &nbsp; &nbsp;<a href="https://www.facebook.com/dkiller.michael/" target="_blank">Michael D-Killer</a></li>
+        <li><i class="fa fa-envelope"></i>&nbsp; &nbsp; &nbsp;<a href="https://mail.google.com/" target="_blank">michael@bidding.com.vn</a></li>
+        <li><i class="fa fa-mobile-phone"></i>&nbsp; &nbsp; &nbsp;(+84) 355 316 191</li>
+    </ul>
+</div>

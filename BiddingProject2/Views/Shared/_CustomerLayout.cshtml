@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <!--  Bootstratp Css  -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Font-awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!--  Toastr Style  -->
+    <link href="~/Content/login/css/toast.min.css" rel="stylesheet" />
+
+    <!--  Custome CSS  -->
+    <link rel="stylesheet" href="~/Content/home/css/customerStyle.css">
+</head>
+
+<body>
+    <div id="freezeLayer" style="display: none;" onclick="customConfirm.close()"></div>
+    <div class="message-container" id="msg-container">
+        <div class="message-header">&#x1F514; Notification</div>
+        <div class="message-body" id="msg-body">
+            <p>This is my question.</p>
+            <div class="message-option">
+                <a href="#" onclick="customConfirm.okay();">Ok</a>
+                <a href="#" onclick="customConfirm.close();">Cancel</a>
+            </div>
+        </div>
+    </div>
+    <button class="hidden" data-toggle="modal" data-target="#exampleModalCenter" id="showIndividual"></button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Congratulation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    You became the winner on this bidding session
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="location.href=@Url.Action("/Admin/Admin/BidCart")">Go to bidding cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="header-container flex-row">
+        <div class="header-brand">
+            <a href="~/Home/Index" id="logo-brand">Michael</a>
+        </div>
+        <div>
+            <ul class="list-items flex-row">
+                <li class="link-item">
+                    <a href="@Url.Action("Contact", "Home")">Contact</a>
+                </li>
+                <li class="link-item">
+                    <a href="@Url.Action("AboutUs", "Home")">About Us</a>
+                </li>
+                <li class="link-item">
+                    <a href="#">Policy</a>
+                </li>
+            </ul>
+        </div>
+        <div class="login-section">
+            <ul class="container-section">
+                <li>
+                    <div class="cart-status">
+                        <div class="total-items hidden"><span></span></div>
+                        <a href="@Url.Action("BidCart", "Customer", new { area = "Customer"})"><i class="fa fa-shopping-cart"></i></a>
+                    </div>
+                </li>
+                <li class="private-profile">
+                    @*<a href="@Url.Action("Index", "Customer", new { area = "Customer"})">Private Information</a>*@
+                    <div class="profile">
+                        <div class="icon_wrap">
+                            @{
+                                string path = "~/Images/unnamed.png";
+                            }
+                            <img src="~/Images/unnamed.png" alt="profile_pic">
+                            <span class="name">John Alex</span>
+                            <i class="fa fa-chevron-down"></i>
+                        </div>
+
+                        <div class="profile_dd">
+                            <ul class="profile_ul">
+                                <li class="profile_li">
+                                    <a class="profile" href='@Url.Action("Index", "Customer", new { area = "Customer"})'>
+                                        <span class="picon">
+                                            <i class="fa fa-user-secret"></i>
+                                        </span>Profile
+                                    </a>
+                                </li>
+                                <li><a class="view-order" href="@Url.Action("ManageOrder", "Customer", new { area = "Customer"})"><span class="picon"><i class="fa fa-th-list"></i></span>View Order</a></li>
+                                <li><a class="logout" href="/Home/Logout"><span class="picon"><i class="fa fa-sign-out"></i></span>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        @RenderBody()
+    </main>
+    <footer class="footer">
+        <p>Copyright&reg; by Michael Corporation</p>
+    </footer>
+
+    <!--  Jquery library  -->
+    <script src="~/Content/home/js/jquery3.4.1.min.js"></script>
+
+    <!-- SignalR JS -->
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+
+    <!-- SignalR Hubs -->
+    <script src="/signalr/hubs"></script>
+
+    <!--  Toastr Message Library  -->
+    <script src="~/Content/login/js/toast.min.js"></script>
+
+    <!--  Bootstrap JS  -->
+    <script src="~/scripts/bootstrap.min.js"></script>
+
+    <!--  Custome JS  -->
+    <script src="~/Content/home/js/main.js"></script>
+
+    <!--  Extra Script  -->
+    @RenderSection("scripts", false)
+</body>
+
+</html>

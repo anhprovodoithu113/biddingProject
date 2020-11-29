@@ -1,0 +1,79 @@
+﻿@model List<BiddingProject2.Models.Order>
+
+@{
+    ViewBag.Title = "ManageOrder";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<style>
+    .product-detail{
+        display: grid;
+        grid-template-columns: 20% 80%;
+    }
+
+    .product-detail img{
+        width: 50px;
+        height: 50px;
+    }
+
+    .product-detail .detail p:first-child{
+        font-family: 1.2rem;
+        font-weight: 700;
+    }
+
+    .product-detail .detail p:last-child{
+        font-style:italic;
+    }
+</style>
+
+<h2>My Orders</h2>
+
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Purchase day</th>
+                <th>Product</th>
+                <th>Total Price</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Number</td>
+                <td>@item.CreatedDate.ToShortDateString()</td>
+                <td class="product-detail">
+                    <div>
+                        @{ 
+                            string path = "~/Images/unnamed.png";
+                            if(item.Product.Image != null)
+                            {
+                                path = item.Product.Image;
+                            }
+                        }
+                        <img src=@Url.Content(path) />
+                    </div>
+                    <div class="detail">
+                        <p>@item.Product.Name</p>
+                        <p>@item.Product.Description</p>
+                    </div>
+                </td>
+                <td>$@item.Price</td>
+                <td>
+                    @{ 
+                        string p = item.State == 0 ? "Processing" : item.State == 1 ? "Transfering" : item.State == 2 ? "Transfer Successful" : item.State == 3 ? "Canceled" : "";
+                        string html = "<p>" + p + "</p>";
+                        if(p == "Processing")
+                        {
+                            html += "<button class=\"btn btn-primary\">Cancel</button>";
+                        }
+                    } @Html.Raw(html)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

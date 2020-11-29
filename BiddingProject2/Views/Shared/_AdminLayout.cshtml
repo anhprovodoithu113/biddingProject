@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+
+    <!--  Font awesome  -->
+    <link rel="stylesheet" href="~/Content/admin/css/all.css">
+
+    <!--  AOS Library  -->
+    <link rel="stylesheet" href="~/Content/admin/css/aos.css">
+
+    <!--  Dialog Box  -->
+    <link href="~/Content/admin/css/dialogbox.css" rel="stylesheet" />
+
+    <!--  Toastr Style  -->
+    <link href="~/Content/admin/css/toastr.min.css" rel="stylesheet" />
+
+    <!--  Custom Style  -->
+    <link rel="stylesheet" href="~/Content/admin/css/style.css">
+</head>
+
+<body>
+    <div id="freezeLayer" style="display: none;" onclick="customConfirm.close()"></div>
+    <div class="message-container" id="msg-container">
+        <div class="message-header">&#x1F514; Notification</div>
+        <div class="message-body" id="msg-body">
+            <p>This is my question.</p>
+            <div class="message-option">
+                <a href="#" onclick="customConfirm.okay();">Ok</a>
+                <a href="#" onclick="customConfirm.close();">Cancel</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-page">
+        <div class="left-side" data-aos="fade-left" data-aos-delay="100">
+            <div class="heading-title">
+                <a href="@Url.Action("Index", "Admin")">
+                    <h1>Michael</h1>
+                </a>
+            </div>
+            <div>
+                <ul class="link-list">
+                    <li class="link-items">
+                        <a href="@Url.Action("Index", "Admin")">Dashboard</a>
+                    </li>
+                    <li class="link-items">
+                        <a href="@Url.Action("Category", "Admin")">Categories</a>
+                    </li>
+                    <li class="link-items">
+                        <a href="@Url.Action("Products", "Admin")">Products</a>
+                    </li>
+                    <li class="link-items">
+                        <a href="@Url.Action("Customers", "Admin")">Customers</a>
+                    </li>
+                    <li class="link-items">
+                        <a href="@Url.Action("Orders", "Admin")">Orders</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-side" data-aos="fade-right" data-aos-delay="150">
+            <div class="info-panel">
+                <div class="info-link">
+                    <a href="@Url.Action("PrivateInfor", "Admin")">Private Information</a>
+                    <a href="@Url.Action("Logout", "Admin")">Logout</a>
+                </div>
+            </div>
+            <div class="body-page">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <!--  JQuery Library  -->
+    <script src="~/Content/admin/js/Jquery3.4.1.min.js"></script>
+
+    <!--  Bootstrap Library  -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <!--  ChartJS Library  -->
+    <script src="~/Content/admin/js/chart.min.js"></script>
+
+    <!--  DialogBox Library  -->
+    <script src="~/Content/admin/js/dialogBox.js"></script>
+
+    <!--  AOS library  -->
+    <script src="~/Content/admin/js/aos.js"></script>
+
+    <!--  Toastr Message Library  -->
+    <script src="~/Content/admin/js/toastr.min.js"></script>
+
+    <!--  Custome JS  -->
+    <script src="~/Content/admin/js/main.js"></script>
+
+    <!--  Extra Script  -->
+    @RenderSection("scripts", false)
+</body>
+
+</html>
+

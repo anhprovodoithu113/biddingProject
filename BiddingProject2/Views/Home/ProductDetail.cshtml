@@ -1,0 +1,68 @@
+﻿@using BiddingProject2.Models
+@model Product
+
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    string path = "~/Images/unnamed.png";
+    List<Result> lstResult = ViewBag.LstResult;
+    List<ChitChat> lstChat = ViewBag.ListChat;
+    if (Model.Image != null)
+    {
+        path = Model.Image;
+    }
+}
+
+<div class="container flex-row">
+    <p id="myIdProduct" class="hidden">@Model.ProductId</p>
+    <div class="container-image">
+        <img class="productImage" src=@Url.Content(path) />
+    </div>
+    <div class="product-information">
+        <h2 id="productName">@Model.Name</h2>
+        <p>Price: <span>$</span><span id="originPrice">@Model.EndPrice</span> </p>
+        <span class="hidden myTime">@Model.StartDate</span>
+        <p>Time: <span id="timeLeft"></span></p>
+        <div class="biddingSection">
+            <label>Your price (Unit: USD)</label>
+            <input type="text" placeholder="Input your price" id="customerPrice" />
+            <input type="button" class="btn btn-custome" id="btnSendPrice" value="Bidding" />
+        </div>
+        <div class="biddingState">
+            <h2 class="background-green">Current Bidding</h2>
+            <div class="subImage hidden">
+                <img src="~/Images/unnamed.png" />
+                <p id="notificationMessage"></p>
+            </div>
+            <p class="hidden" id="customerName">@ViewBag.CustomerName</p>
+            <p class="hidden" id="cusPrice">@ViewBag.Price</p>
+        </div>
+    </div>
+</div>
+<div class="container flex-column">
+    <div class="chattingSection">
+        <h2 class="background-green">Chatting</h2>
+        <div class="chatting">
+            <div class="chatDetail myGroupChat">
+                @{
+                        if (lstChat != null)
+                        {
+                            foreach (var item in lstChat)
+                            {
+                                <p><b>@item.Account.Profile.Name</b>: @item.Message</p>
+                            }
+                        }
+                    }
+            </div>
+            <div class="chatSending">
+                <input type="text" class="message" placeholder="Type to chat" />
+                <input type="button" class="btn sendingButton" value="Send" />
+            </div>
+        </div>
+    </div>
+    <div class="productDetail">
+        <h2 class="background-green">Product detail</h2>
+        <p>@Model.Description</p>
+    </div>
+</div>
+

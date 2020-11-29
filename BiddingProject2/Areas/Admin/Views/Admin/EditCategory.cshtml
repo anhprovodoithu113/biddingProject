@@ -1,0 +1,62 @@
+﻿@model BiddingProject2.Models.Category
+
+@{
+    ViewBag.Title = "EditCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .hidden {
+        display: none;
+    }
+
+    div {
+        font-family: var(--Livvic);
+    }
+
+    .toast-warning {
+        color: white !important;
+        background-color: #F89406 !important;
+        font-family: var(--Livvic);
+    }
+</style>
+
+<h1>Edit Category</h1>
+
+<p class="hidden" id="myMessage">@ViewBag.Msg</p>
+@using (Html.BeginForm("EditCategory", "Admin", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.CategoryId)
+    <div class="form-horizontal">
+        <div class="col-lg-12 col-md-12">
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-4 col-lg-4" })
+                <div class="col-md-8 col-lg-8">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-offset-2 col-md-10 ml-3">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="ml-4">
+    @Html.ActionLink("Back to List", "Category")
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(() => {
+            $msg = $('#myMessage').text();
+            if ($msg != "") {
+                if ($msg.indexOf('duplicated.') >= 0) {
+                    toastr.warning($msg, 'Notification');
+                }
+            }
+        });
+    </script>
+}

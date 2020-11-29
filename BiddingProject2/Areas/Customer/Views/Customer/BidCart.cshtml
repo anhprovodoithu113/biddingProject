@@ -1,0 +1,198 @@
+﻿@model List<BiddingProject2.Models.Result>
+
+@{
+    ViewBag.Title = "BidCart";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    float totalPrice = 0;
+}
+
+<style>
+    .container-cart {
+        height: 100vh;
+    }
+
+        .container-cart .stateTable th {
+            font-size: 0.9rem;
+        }
+
+        .container-cart .stateTable tr td:nth-child(2) {
+            width: 300px;
+        }
+
+        .container-cart .stateTable tr td:not(:nth-child(2), :nth-child(1)), tr th:not(:nth-child(1)) {
+            vertical-align: middle !important;
+            text-align: center;
+        }
+
+    .stateTable tr td:nth-child(3) {
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .stateTable tr td img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .stateTable tbody .btn-default {
+        transition: all .9s;
+        outline: none !important;
+    }
+
+        .stateTable tbody .btn-default:hover {
+            transform: rotate(180deg) scale(2);
+            transform-origin: center center;
+        }
+
+    .col-lg-4 .card, .btn-block {
+        width: 90%;
+    }
+
+    .col-lg-4 .card-body, .card-footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .col-lg-4 .card-footer {
+        height: 3rem;
+    }
+
+    .col-lg-4 .card-header {
+        font-size: 1rem;
+    }
+
+    .col-lg-4 .btn-block {
+        background-color: var(--hover-colour);
+        color: white;
+    }
+
+        .col-lg-4 .btn-block:hover {
+            background-color: var(--bg-colour);
+            color: black;
+            border: 1px solid var(--hover-colour);
+        }
+
+    .noItem-img {
+        margin: 0 auto;
+        width: 1000px;
+    }
+
+    .cart-img {
+        width: 1000px;
+        height: 800px;
+    }
+
+    #paypal-button-container {
+        width: 90%;
+    }
+</style>
+
+<h2>BidCart</h2>
+<p class="hidden" id="myMessage">@ViewBag.Message</p>
+
+@if ((Model as List<BiddingProject2.Models.Result>).Count != 0)
+{
+    <div class="container-cart">
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <table class="table table-striped stateTable">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Product</th>
+                            <th>Your bidding price</th>
+                            <th>Bidding date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            string defaultPath = "~/Image/unnamed.png";
+                            if (item.Product.Image != null) { defaultPath = item.Product.Image; }
+                            <tr>
+                                <td>
+                                    <img src=@Url.Content(defaultPath) />
+                                </td>
+                                <td>
+                                    <h5>@item.Product.Name</h5>
+                                    <p><i>@item.Product.Description</i></p>
+                                </td>
+                                <td>$@item.Price</td>
+                                <td>@item.CreatedDate.ToShortDateString()</td>
+                                <td><button class="btn btn-default" onclick="customConfirm.show('Do you want to delete this item?', deleteItem, @item.ResultId)">&times;</button></td>
+                            </tr>
+                            totalPrice += item.Price;
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="card">
+                    <div class="card-header">Order Summary</div>
+                    <div class="card-body">
+                        <div>
+                            <p>Current Total</p>
+                            <p>Transfer fee</p>
+                        </div>
+                        <div>
+                            <p>$@totalPrice</p>
+                            <p>$5</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p>Total</p>
+                        @{
+                            totalPrice = totalPrice + 5;
+                        }
+                        <p>$<span id="total">@totalPrice</span></p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Set up a container element for the button -->
+                    <div id="paypal-button-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="noItem-img">
+        <img src="~/Images/empty-cart.png" class="cart-img" />
+    </div>
+}
+
+@section scripts{
+    <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AdCgc6hRXYAuO3o1WJfi4Nw6utW65Y9vqKqi4bEBEZQNP-pS6C4P4y8SNpSae0-w_1sjUDdEqIQKQZLl&currency=USD"></script>
+
+    <script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+            style: {
+                layout: 'horizontal'
+            },
+            // Set up the transaction
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: $('#total').text()
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (details) {
+                    location.href = '/Customer/Customer/PackageOrder';
+                });
+            }
+        }).render('#paypal-button-container');
+
+    </script>
+
+}

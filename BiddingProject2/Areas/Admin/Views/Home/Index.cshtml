@@ -1,0 +1,74 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h1>Private Information</h1>
+<div class="form-container">
+    <div class="form-image">
+        <img src="~/Content/admin/image/tamagosho_sky_stars_telescope_night_window_102167_1920x1080.jpg" alt=""
+             id="privateImage">
+    </div>
+    <div class="form-info">
+        <form>
+            <div class="form-group row">
+                <label class="col-sm-2">Username</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputUsername" placeholder="Username">
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2">Age</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="inputAge" placeholder="Age">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2">Occupation</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputOccupation" placeholder="Occupation">
+                </div>
+            </div>
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                            <label class="form-check-label" for="gridRadios1">
+                                Male
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                            <label class="form-check-label" for="gridRadios2">
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group row">
+                <label class="col-sm-2">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2">Address</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Address">
+                </div>
+            </div>
+            <button class="custome-btn">Save</button>
+        </form>
+    </div>
+</div>

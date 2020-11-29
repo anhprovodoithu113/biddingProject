@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <!--  Bootstratp Css  -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Font-awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!--  Toastr Style  -->
+    <link href="~/Content/login/css/toast.min.css" rel="stylesheet" />
+
+    <!--  Custome CSS  -->
+    <link rel="stylesheet" href="~/Content/home/css/style.css">
+</head>
+
+<body>
+    <nav class="header-container flex-row">
+        <div class="header-brand">
+            <a href="@Url.Action("Index", "Home")" id="logo-brand">Michael</a>
+        </div>
+        <div>
+            <ul class="list-items flex-row">
+                <li class="link-item">
+                    <a href="@Url.Action("Contact", "Home")">Contact</a>
+                </li>
+                <li class="link-item">
+                    <a href="@Url.Action("AboutUs", "Home")">About Us</a>
+                </li>
+                <li class="link-item">
+                    <a href="#">Policy</a>
+                </li>
+            </ul>
+        </div>
+        <div class="login-section">
+            <button class="btn btn-custome" onclick="location.href='@Url.Action("Index", "Login")'">Login</button>
+            <a id="register" href="@Url.Action("RegisterAccount", "Login")">Register</a>
+        </div>
+    </nav>
+    <main>
+        @RenderBody()
+    </main>
+    <footer class="footer">
+        <p>Copyright&reg; by Michael Corporation</p>
+    </footer>
+
+    <!--  Jquery library  -->
+    <script src="~/Content/home/js/jquery3.4.1.min.js"></script>
+
+    <!-- SignalR JS -->
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+
+    <!-- SignalR Hubs -->
+    <script src="/signalr/hubs"></script>
+
+    <!--  Toastr Message Library  -->
+    <script src="~/Content/login/js/toast.min.js"></script>
+
+    <!--  Bootstrap JS  -->
+    <script src="~/scripts/bootstrap.min.js"></script>
+
+    <!--  Custome JS  -->
+    <script src="~/Content/home/js/main.js"></script>
+
+    <!--  Extra Script  -->
+    @RenderSection("scripts", false)
+</body>
+
+</html>

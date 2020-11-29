@@ -1,0 +1,76 @@
+﻿@model List<BiddingProject2.Models.Order>
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    decimal totalPage = ViewBag.TotalPage;
+}
+
+<h1>Orders</h1>
+
+@using (Html.BeginForm("Orders", "Admin", FormMethod.Get))
+{
+    <div class="searchSection float-right">
+        <input type="text" name="searchString" placeholder="Input something" value="@ViewBag.Search" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Number Order</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Customer</th>
+            <th>State</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int count = 1; }
+        @foreach (var item in Model)
+        {
+            string defaultPath = "~/Images/unnamed.png";
+            if (!String.IsNullOrEmpty(item.Product.Image))
+            {
+                defaultPath = item.Product.Image;
+            }
+            <tr>
+                <td>@count</td>
+                <td>@item.Number</td>
+                <td>
+                    <img src=@Url.Content(defaultPath) style="width: 100px; height: 100px;" />
+                </td>
+                <td>@item.Product.Name</td>
+                <td>@item.Account.Profile.Name</td>
+                <td>@{
+                    string p = item.State == 0 ? "Processing" : item.State == 1 ? "Transfering" : item.State == 2 ? "Transfer Successful" : item.State == 3 ? "Canceled" : "";
+                    @:@p
+                }</td>
+            </tr>
+            count += 1;
+                    }
+    </tbody>
+</table>
+
+@if (ViewBag.TotalPage != 0)
+{
+    <div class="pageNumber">
+        <p>Page:&nbsp;<span id="currentPage">@ViewBag.PageNumber</span>&nbsp;of @ViewBag.TotalPage</p>
+        <ul>
+            @for (int i = 1; i <= totalPage; i++)
+            {
+                <li onclick="location.href='@Url.Action("Orders", new { page = i, searchString = @ViewBag.Search})'">
+                    <a href="@Url.Action("Orders", new { page = i, searchString = @ViewBag.Search })">@i</a>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <div class="displayNotify">
+        <h2>There are nothing on this list</h2>
+    </div>
+}

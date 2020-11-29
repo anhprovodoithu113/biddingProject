@@ -1,0 +1,402 @@
+@import url('font.css');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+
+    /*  Theme colours  */
+    --text-gray: #3f4954;
+    --text-light: #686666da;
+    --bg-colour: #ecf0f3;
+    --side-bg: #fcedd5;
+    --hover-colour: #7BA69F;
+    --white: #ffffff;
+    --midnight: #104f55;
+
+
+    /*  Gradient Colour  */
+    --sky: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+
+    /*  Theme font  */
+    --Cain: 'Cain', cursive;
+    --Eartp: 'Eartp', cursive;
+    --RoyalJelly: 'RoyalJelly', cursive;
+    --Livvic: 'Livvic', cursive;
+    --Abel: 'Abel', cursive;
+    
+}
+
+body{
+    background-color: var(--bg-colour);
+    font-family: var(--Livvic);
+    font-size: 1.1rem;
+    width: 100vw;
+    height: 100vh;
+}
+
+/*  Global Classes  */
+
+a{
+    text-decoration: none !important;
+    color: black;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+button.btn{
+    outline: none;
+    border: none;
+    border-radius: .5rem;
+    font-size: 1.3rem;
+    font-family: var(--Livvic);
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/*  Header section  */
+.header-container{
+    min-height: 12vh;
+    justify-content: space-between;
+}
+
+.header-container .header-brand{
+    margin-top: 2rem;
+    margin-left: 5vh;
+}
+
+.header-container .header-brand #logo-brand{
+    text-transform: uppercase;
+    font-family: var(--Cain);
+    font-size: 1.9rem;
+    transition: all .5s;
+}
+
+.header-container .header-brand #logo-brand:hover{
+    color: var(--text-gray);
+}
+
+.header-container .list-items .link-item, #register {
+    margin-top: .5rem;
+    padding: 1.5rem 1rem;
+    transition: all .5s;
+}
+
+.header-container .list-items .link-item:hover{
+    background-color: var(--hover-colour);
+}
+
+#register:hover {
+    color: rgb(247, 156, 140);
+}
+
+.header-container .list-items .link-item:hover a{
+    color: white;
+}
+
+.header-container .login-section{
+    margin-right: 5vh;
+    margin-top: 2rem;
+}
+
+.header-container .login-section .btn-custome {
+    margin-right: .7rem;
+    padding: .5rem 2rem;
+    background-color: var(--hover-colour);
+    color: white;
+    transition: all .5s;
+}
+
+.header-container .login-section .btn-custome:hover {
+    background-color: transparent;
+    border: 1px solid var(--hover-colour);
+    color: var(--hover-colour);
+}
+
+.header-container .login-section a:hover{
+    text-decoration: underline;
+}
+
+/*  Image section  */
+.img-section{
+    width: 100%;
+    height: 40vw;
+    margin-top: .8rem;
+    background-color: var(--hover-colour);
+    position: relative;
+}
+
+.img-section img{
+    width: 17%;
+    /* filter: blur(5px);
+    -webkit-filter: blur(5px); */
+}
+
+.img-section img[alt='hand-1']{
+    position: absolute;
+    top: 30%;
+
+    animation-name: wavingHand1;
+    animation-duration: 2s;
+    animation-delay: .5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transform-origin: bottom left;
+}
+
+@keyframes wavingHand1{
+    0%{
+        transform: rotateZ(-90deg);
+    }
+    100%{
+        transform: rotateZ(0deg);
+    }
+}
+
+.img-section img[alt='hand-2']{
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+
+    animation-name: wavingHand2;
+    animation-duration: 2s;
+    animation-delay: .5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transform-origin: bottom left;
+}
+
+@keyframes wavingHand2{
+    0%{
+        transform: rotateZ(4deg);
+    }
+    100%{
+        transform: rotateZ(-4deg);
+    }
+}
+
+.img-section img[alt='hand-3']{
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+
+    animation-name: wavingHand3;
+    animation-duration: 2s;
+    animation-delay: .5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transform-origin: bottom left;
+}
+
+@keyframes wavingHand3{
+    0%{
+        transform: rotateZ(-4deg);
+    }
+    100%{
+        transform: rotateZ(4deg);
+    }
+}
+
+.img-section img[alt='hand-4']{
+    position: absolute;
+    bottom: 0;
+    right: 20%;
+
+    animation-name: wavingHand2;
+    animation-duration: 2s;
+    animation-delay: .5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transform-origin: bottom left;
+}
+
+.img-section img[alt='hand-5']{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    animation-name: wavingHand3;
+    animation-duration: 2s;
+    animation-delay: .5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transform-origin: bottom left;
+}
+
+
+
+.img-section .slogan-text{
+    position: absolute;
+    bottom: 5%;
+}
+
+.img-section .slogan-text h2{
+    font-family: var(--Abel);
+    color: white;
+    font-size: 5rem;
+    margin-left: 1rem;
+}
+
+/*  Latest update product section  */
+.latest-products{
+    margin: 2rem 0 50rem;
+    color: var(--text-gray);
+}
+
+.latest-products h3{
+    padding: 2rem 0;
+    margin-left: 1.5rem;
+}
+
+.section-title {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    margin: 0 3rem;
+}
+
+.section-title label {
+    font-size: 1.5rem;
+}
+
+.product-card {
+    position: relative;
+    margin-left: 7rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 17%;
+    border-radius: 1.3rem;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
+}
+
+.product-card .header-card h4{
+    padding: 1.2rem 0;
+    text-align: center;
+}
+
+.product-card .body-card .product-price{
+    padding-top: 1rem;
+    text-align: right;
+    margin-right: .6rem;
+}
+
+.product-card .body-card .product-price #price {
+    font-size: 2rem;
+    margin-bottom: 0;
+}
+
+.product-card .body-card .product-price #unit{
+    font-size: .8rem;
+}
+
+.product-card .body-card .description-card{
+    height: 11vw;
+    margin: 1.3rem 1rem 0;
+    text-align: justify;
+    overflow-y: hidden;
+}
+
+.product-card .body-card{
+    position: relative;
+}
+
+.product-card .body-card img {
+    width: 100%;
+    height: 170px;
+}
+
+.product-card .body-card .bidding-btn{
+    position: absolute;
+    padding: .5rem 1rem;
+    width: 90%;
+    display: block;
+    color: white;
+    border-radius: 3rem;
+    background-color: var(--hover-colour);
+    transition: all .5s;
+    bottom: 4%;
+    left: 4%;
+}
+
+.product-card .body-card .bidding-btn:hover{
+    background-color: transparent;
+    border: 1px solid var(--hover-colour);
+    color: var(--hover-colour);
+}
+
+.product-card .background-card {
+    position: absolute;
+    background: var(--hover-colour);
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    border-radius: 1.3rem;
+}
+
+.product-card .background-card .notifycation {
+    margin-top: 50%;
+}
+
+.product-card .background-card .notifycation p {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: .2rem .7rem;
+}
+
+.product-card .background-card .notifycation p:last-child {
+    font-size: 1.7rem;
+}
+
+/*  footer  */
+.footer {
+    height: 5vw;
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    justify-items: auto;
+    margin-top: 70vh;
+    background-color: var(--hover-colour);
+    text-align: center;
+}
+
+.footer p{
+    margin: auto;
+}
+
+/* Extra pages */
+.title-header {
+    margin-left: 2rem;
+}
+
+.content-detail{
+    margin-left: 2rem;
+}
+
+.content-detail ul li{
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+}
+
+/* About us */
+.aboutUs-content {
+    margin-top: 2rem;
+    margin-left: 4rem;
+    width: 70vw;
+}
+
+.aboutUs-content div {
+    margin-top: 2rem;
+}
